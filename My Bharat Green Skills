@@ -1,0 +1,130 @@
+📋 MY Bharat Regional CSR Linked Green Skills & Tribal Empowerment Network
+
+यह प्रोजेक्ट Viksit Bharat @2047 के दृष्टिकोण के तहत माइनिंग जिलों (जैसे बालाघाट, मध्य प्रदेश) के युवाओं और बैगा जनजाति (Baiga Tribe) को स्थानीय उद्योगों (MOIL/HCL), आधुनिक तकनीक (GIS/AI) और पर्यावरण संरक्षण से जोड़ने का एक वर्किंग प्रोटोटाइप है।
+
+💡 मुख्य विशेषताएं (Key Features)
+* जियो-टैग्ड प्लांटेशन: छात्र जब पौधा लगाएंगे, तो फोन से फोटो लेते ही जीपीएस (GPS) डेटा दर्ज हो जाएगा।
+* GIS और सैटेलाइट ट्रैकिंग:ISRO भुवन/सैटेलाइट्स की मदद से हर 6 महीने में पौधों की बढ़त और इलाके की हरियाली को ट्रैक किया जाएगा।
+* AI स्मार्ट वेरिफिकेशन: अपलोड की गई तस्वीरों को AI स्वचालित रूप से जांचकर छात्रों के वॉलेट में Green Credit Points क्रेडिट करेगा।
+* बैगा स्किल हब: बैगा विशेषज्ञों को 'मास्टर ट्रेनर' बनाकर कॉलेज के युवाओं को बांस और पराली से इको-फ्रेंडली फर्नीचर व जैविक खाद बनाने की ट्रेनिंग देना।
+
+🛠️ प्रोजेक्ट का तकनीकी ढांचा (Architecture Diagram)
+
+```mermaid
+graph TD
+    subgraph Frontend [यूज़र इंटरफेस - Mobile/Web]
+        A[युवा / बैगा शिल्पकार] -->|1. फोटो + GPS लोकेशन अपलोड| B(MY Bharat App Frontend)
+    end
+
+    subgraph Core_Engine [AI & GIS वेरिफिकेशन इंजन]
+        B -->|2. Image + Metadata API Request| C[Secure API Gateway]
+        C -->|3. Geo-Coordinates Data| D[GIS Mapping Engine - ISRO Bhuvan]
+        C -->|4. Visual Verification| E[AI Smart Image Analyzer]
+    end
+
+    subgraph Database_Layer [डेटाबेस और क्रेडिट्स वॉलेट]
+        D -->|5. Verified Location| F{Validation Control}
+        E -->|5. Confirmed Plantation/Craft| F
+        F -->|If Valid| G[(Secure Central DB)]
+        G -->|6. Mint Points| H[Green Credits Wallet]
+    end
+
+    subgraph Corporate_CSR [उद्योग एवं रोजगार लिंकेज]
+        I[(लोकल कॉर्पोरेट्स: MOIL / HCL)] -->|CSR फंड एवं जॉब वेकेंसी| J[Apprenticeship Priority System]
+        H -->|7. क्रेडिट्स स्कोर जमा करें| J
+        J -->|8. रोजगार/इंटरव्यू में 1st Preference| A
+    end
+```
+
+⚙️ सेटअप निर्देश (Setup Steps)
+1. इस रिपॉजिटरी को अपने कंप्यूटर पर डाउनलोड करें।
+2. अपने कंप्यूटर पर पाइथन (Python) इंस्टॉल करें।
+3. प्रोजेक्ट रूट में `.env` फ़ाइल बनाएं (नीचे दिए गए वेरिएबल्स को जोड़ें)।
+4. सैंपल प्रोटोटाइप रन करें: `python app.py`
+
+🔒 एनवायरनमेंट वेरिएबल्स (Environment Variables)
+सुरक्षा और API कॉन्फ़िगरेशन के लिए प्रोजेक्ट रूट में एक `.env` फ़ाइल बनाएं:
+```env
+AI_VISION_API_KEY=your_mock_ai_key_12345
+AI_CONFIDENCE_THRESHOLD=0.85
+GIS_PROVIDER_URL=https://nrsc.gov.in
+DEFAULT_LATITUDE=21.8124
+DEFAULT_LONGITUDE=80.1837
+
+📜 लाइसेंस (License)
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+📌app.py
+import time
+
+class GreenSkillsPortal:
+    def __init__(self):
+        self.regional_db = {
+            "balaghat": {
+                "district_name": "Balaghat, MP",
+                "partner_industries": ["MOIL (Manganese Ore India Ltd)", "HCL (Hindustan Copper Ltd)"],
+                "available_tasks": [{"task_id": 101, "name": "बांस के अवशेषों से इको-फर्नीचर निर्माण", "base_credits": 50}]
+            }
+        }
+        self.user_wallet = {"name": "रामलाल बैगा", "location": "Balaghat", "earned_credits": 0}
+
+    def simulate_submission(self, task_id, latitude, longitude):
+        print(f"\n🚀 [MY BHARAT] नया सबमिशन प्राप्त हुआ | Lat {latitude}, Long {longitude}")
+        time.sleep(1)
+        
+        # Module 1: AI Verification
+        print("🔍 [AI VERIFICATION] अपलोड की गई फोटो की जांच की जा रही है...")
+        print("✅ AI वेरिफिकेशन सफल! कार्य प्रामाणिक पाया गया।")
+        
+        # Module 2: GIS Tracking
+        print("🛰️ [GIS & SATELLITE] लोकेशन ट्रैक की जा रही है...")
+        if 21.5 <= latitude <= 22.5 and 80.0 <= longitude <= 81.0:
+            print("🎯 GIS पुष्टि: लोकेशन MOIL/HCL खदान के प्रभावित ग्रीन-बेल्ट क्षेत्र में है।")
+            self.user_wallet["earned_credits"] += 50
+            print(f"🎉 बधाई हो {self.user_wallet['name']}! आपके वॉलेट में 50 Green Credits जोड़ दिए गए हैं।")
+            print(f"🏢 [CSR LINKAGE] आप MOIL/HCL के आगामी अप्रेंटिसशिप बैच में 1st Priority के लिए क्वालिफाइड हैं!")
+            return True
+        else:
+            print("❌ GIS अलर्ट: लोकेशन माइनिंग क्षेत्र से बाहर है।")
+            return False
+
+if __name__ == "__main__":
+    portal = GreenSkillsPortal()
+    # बालाघाट की सटीक लोकेशन पर टेस्ट रन
+    portal.simulate_submission(101, 21.8124, 80.1837)
+
+
+🛠️ Technical Design Document (TDD)
+
+1. सिस्टम का परिचय (Introduction)
+यह सिस्टम जियो-फेंसिंग (Geo-fencing), सैटेलाइट ट्रैकिंग (ISRO Bhuvan GIS) और AI इमेज डिटेक्शन का उपयोग करके ग्रामीण और आदिवासी युवाओं के सामाजिक कार्यों (जैसे वृक्षारोपण और इको-फर्नीचर) को प्रमाणित करता है और उन्हें ग्रीन क्रेडिट्स देता है।
+
+2. डेटाबेस आर्किटेक्चर (Database Schema Sample)
+सिस्टम में यूज़र का डेटा सुरक्षित रखने के लिए निम्नलिखित फ़ील्ड्स का उपयोग किया जाता है:
+* `user_id`: विशिष्ट युवा पहचान संख्या (MY Bharat ID)
+* `gps_coordinates`: स्थान सत्यापन के लिए (Latitude/Longitude)
+* `green_credits_balance`: संचित पॉइंट्स जिन्हें नौकरियों में प्राथमिकता के लिए उपयोग किया जा सकता है।
+
+
+🧪 Sample Data & Test Cases
+
+टेस्ट केस 1: सफल सत्यापन (Success Case)
+* इनपुट लोकेशन:Latitude 21.8124, Longitude 80.1837 (बालाघाट माइनिंग एरिया)
+* अनुमानित परिणाम:AI फोटो पास करेगा, GIS क्षेत्र को मान्य करेगा, और वॉलेट में 50 पॉइंट्स जुड़ेंगे।
+
+## टेस्ट केस 2: असफल स्थान सत्यापन (Failed Location Case)
+* इनपुट लोकेशन:Latitude 28.6139, Longitude 77.2090 (दिल्ली - माइनिंग क्षेत्र से बाहर)
+* अनुमानित परिणाम: AI फोटो पास कर सकता है, लेकिन GIS इसे अमान्य कर देगा क्योंकि यह लक्ष्य जिले से बाहर है।
+
+
+
+MIT License
+Copyright (c) 2026 Green Skills Network Team
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files...
+
+
+
+
+
+

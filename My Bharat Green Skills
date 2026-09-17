@@ -15,6 +15,7 @@ graph TD
     subgraph Frontend [यूज़र इंटरफेस - Mobile/Web]
         A[युवा / बैगा शिल्पकार] -->|1. फोटो + GPS लोकेशन अपलोड| B(MY Bharat App Frontend)
     end
+    ```
 
     subgraph Core_Engine [AI & GIS वेरिफिकेशन इंजन]
         B -->|2. Image + Metadata API Request| C[Secure API Gateway]
